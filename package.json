@@ -11,6 +11,7 @@
     "react-router-dom": "^5.0.1",
     "react-scripts": "3.0.1",
     "reactotron": "^0.9.0",
+    "reactotron-react-js": "^3.3.2",
     "reactotron-redux": "^3.1.1",
     "reactotron-redux-saga": "^4.2.2",
     "redux": "^4.0.4",
