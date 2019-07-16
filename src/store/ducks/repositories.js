@@ -3,41 +3,28 @@
  */
 
 export const Types = {
-  ADD_REQUEST: 'Repositories/ADD_REQUEST',
-  ADD_SUCESS: 'Repositories/ADD_SUCESS',
-  REMOVE: 'Repositories/REMOVE',
+  GET_REPOSITORIES_REQUEST: 'repositories/GET_REPOSITORIES_REQUEST',
+  GET_REPOSITORIES_SUCCESS: 'repositories/GET_REPOSITORIES_SUCCESS',
+  GET_REPOSITORIES_FAILURE: 'repositories/GET_REPOSITORIES_FAILURE',
 };
 
 /**
  * Reducer repositories
  */
 
-const INITIAL_STATE = [
-  {
-    id: 1,
-    name: 'facebook/react',
-    avatar_url: 'facebook',
-  },
-  {
-    id: 2,
-    name: 'angular/angular',
-    avatar_url: 'angular',
-  },
-  {
-    id: 3,
-    name: 'vuejs/vue',
-    avatar_url: 'vue',
-  },
-];
+const INITIAL_STATE = {
+  data: [],
+  loading: false,
+};
 
 export default function Repositories(state = INITIAL_STATE, action) {
   switch (action.type) {
-    case Types.ADD_REQUEST:
-      return state;
-    case Types.ADD_SUCESS:
-      return state;
-    case Types.REMOVE:
-      return state;
+    case Types.GET_REPOSITORIES_REQUEST:
+      return { ...state, loading: true };
+    case Types.GET_REPOSITORIES_SUCCESS:
+      return { ...state, loading: false, data: action.payload.data };
+    case Types.GET_REPOSITORIES_FAILURE:
+      return { ...state, loading: false };
     default:
       return state;
   }
@@ -48,16 +35,17 @@ export default function Repositories(state = INITIAL_STATE, action) {
  */
 
 export const Creators = {
-  addRepositoryRequest: repository => ({
-    type: Types.ADD_REQUEST,
-    payload: { repository },
+  getRepositoriesRequest: username => ({
+    type: Types.GET_REPOSITORIES_REQUEST,
+    payload: { username },
   }),
-  addRepositorySucess: repository => ({
-    type: Types.ADD_SUCESS,
-    payload: { repository },
+
+  getRepositoriesSuccess: data => ({
+    type: Types.GET_REPOSITORIES_SUCCESS,
+    payload: { data },
   }),
-  removeRepository: repository => ({
-    type: Types.REMOVE,
-    payload: { repository },
+
+  getRepositoriesFailure: () => ({
+    type: Types.GET_REPOSITORIES_FAILURE,
   }),
 };
