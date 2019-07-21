@@ -5,10 +5,8 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 
 import Repository from '../../components/repository';
-
+import { Container, Row, Column } from '../../components/grid';
 import { Creators as RepositoriesActions } from '../../store/ducks/repositories';
-
-// import { Container } from './styles';
 
 class Main extends Component {
   state = {
@@ -27,22 +25,28 @@ class Main extends Component {
     const { repositories } = this.props;
     const { data, loading } = repositories;
     return (
-      <div>
-        <form onSubmit={this.handleSubmit}>
-          <input
-            type="text"
-            placeholder="usuário"
-            value={username}
-            onChange={e => this.setState({ username: e.target.value })}
-          />
-          <button type="submit">
-            {loading ? <i className="fa fa-spinner fa-pulse" /> : 'Ok'}
-          </button>
-        </form>
-        {data.map(repository => (
-          <Repository key={repository.id} {...repository} />
-        ))}
-      </div>
+      <Container>
+        <Row>
+          <Column span="12">
+            <div>
+              <form onSubmit={this.handleSubmit}>
+                <input
+                  type="text"
+                  placeholder="usuário"
+                  value={username}
+                  onChange={e => this.setState({ username: e.target.value })}
+                />
+                <button type="submit">
+                  {loading ? <i className="fa fa-spinner fa-pulse" /> : 'Ok'}
+                </button>
+              </form>
+              {data.map(repository => (
+                <Repository key={repository.id} {...repository} />
+              ))}
+            </div>
+          </Column>
+        </Row>
+      </Container>
     );
   }
 }
