@@ -1,0 +1,12 @@
+.rounded {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  overflow: hidden;
+}
+
+.card-item-hover {
+  box-shadow: var(--shadow);
+  transform: scale(1.02);
+  z-index: 10;
+}
