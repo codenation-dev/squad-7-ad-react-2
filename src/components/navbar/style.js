@@ -1,10 +1,13 @@
 import styled from 'styled-components'
 
 export const Nav = styled.div` 
-  display: flex;
-  justify-content: space-between;
-  height: 80px;
-  align-items: center;
+  border-bottom: 2px solid #F0F0F0;
+  position: fixed;
+  left: 0;
+  top: 0;
+  right: 0;
+  background: #fff;
+  z-index: 1000;
 `
 
 export const Logo = styled.div`

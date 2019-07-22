@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { Text, Form, SearchInput, SearchButton } from './style.js';
+import { Text, Form, SearchInput, SearchButton, Spinner } from './style.js';
 
 const SearchBar = ({
   onSubmit,
@@ -14,11 +14,11 @@ const SearchBar = ({
       <Text>github.com/</Text>
       <SearchInput 
         value={keyword} 
-        placeholder="Digite" 
+        placeholder="Digite o usuário do Github" 
         type="text" 
         onChange={onChange} />
       <SearchButton type="Submit">
-        { isLoading ? 'buscando' : 'Procurar' }
+        { isLoading ? <Spinner height="14" /> : 'Procurar' }
       </SearchButton>
     </Form>
   )

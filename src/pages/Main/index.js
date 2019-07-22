@@ -7,8 +7,6 @@ import { bindActionCreators } from 'redux';
 import Repository from '../../components/repository';
 import { Container, Row, Column } from '../../components/grid';
 import { Creators as RepositoriesActions } from '../../store/ducks/repositories';
-import NavBar from '../../components/navbar';
-import SearchBar from '../../components/searchbar';
 
 class Main extends Component {
   state = {
@@ -27,17 +25,9 @@ class Main extends Component {
     const { repositories } = this.props;
     const { data, loading } = repositories;
     return (
-      <Container>
+      <Container fluid>
         <Row>
           <Column span="12">
-            <NavBar>
-              <SearchBar 
-                onSubmit={this.handleSubmit}
-                keyword={username}
-                onChange={e => this.setState({ username: e.target.value })}
-                isLoading={loading}
-              />
-            </NavBar>
             {data.map(repository => (
               <Repository key={repository.id} {...repository} />
             ))}

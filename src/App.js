@@ -6,11 +6,13 @@ import store from './store';
 import Routes from './routes';
 
 import GlobalStyle from './styles/global';
+import NavBar from './components/navbar';
 
 function App() {
   return (
     <Provider store={store}>
       <GlobalStyle />
+      <NavBar />
       <Routes />
     </Provider>
   );
