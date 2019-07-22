@@ -7,13 +7,13 @@ import Routes from './routes';
 
 import GlobalStyle from './styles/global';
 
-function App() {
+const App = () => {
   return (
     <Provider store={store}>
       <GlobalStyle />
       <Routes />
     </Provider>
   );
-}
+};
 
 export default App;
