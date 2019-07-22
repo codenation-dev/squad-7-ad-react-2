@@ -25,25 +25,12 @@ class Main extends Component {
     const { repositories } = this.props;
     const { data, loading } = repositories;
     return (
-      <Container>
+      <Container fluid>
         <Row>
           <Column span="12">
-            <div>
-              <form onSubmit={this.handleSubmit}>
-                <input
-                  type="text"
-                  placeholder="usuário"
-                  value={username}
-                  onChange={e => this.setState({ username: e.target.value })}
-                />
-                <button type="submit">
-                  {loading ? <i className="fa fa-spinner fa-pulse" /> : 'Ok'}
-                </button>
-              </form>
-              {data.map(repository => (
-                <Repository key={repository.id} {...repository} />
-              ))}
-            </div>
+            {data.map(repository => (
+              <Repository key={repository.id} {...repository} />
+            ))}
           </Column>
         </Row>
       </Container>
