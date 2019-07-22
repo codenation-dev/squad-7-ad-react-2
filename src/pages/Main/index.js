@@ -8,6 +8,8 @@ import Repository from '../../components/repository';
 
 import { Creators as RepositoriesActions } from '../../store/ducks/repositories';
 
+import ExternalLink from '../../components/link'
+
 // import { Container } from './styles';
 
 class Main extends Component {
@@ -28,6 +30,7 @@ class Main extends Component {
     const { data, loading } = repositories;
     return (
       <div>
+        <ExternalLink to="http://google.com" type="link">test</ExternalLink>
         <form onSubmit={this.handleSubmit}>
           <input
             type="text"

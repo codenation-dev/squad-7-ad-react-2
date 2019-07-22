@@ -1,26 +1,24 @@
 import React from 'react';
-import Link from './style.js' 
-import { FontAwesomeIcon as _FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faLink } from '@fortawesome/free-solid-svg-icons'
-import { faAt } from '@fortawesome/free-solid-svg-icons'
 import styled from 'styled-components'
+import { At } from 'styled-icons/boxicons-regular/At';
+import { Link as _Link } from 'styled-icons/boxicons-regular/Link';
 
-const FontAwesomeIcon = styled(_FontAwesomeIcon)`
+import Link from './style.js' 
+
+const AtIcon = styled(At)`
   margin-right: 5px;
 `
 
-const SimpleLink = ({
+const LinkIcon = styled(_Link)`
+  margin-right: 5px;
+`
+
+const ExternalLink = ({
   children,
   type,
   to
 }) => {
   
-  const renderIcon = () => {
-    if (type) {
-      return type === 'link' ? faLink : faAt;
-    }
-  } 
-
   const renderLink = () => {
     if (type) {
       return type === 'email' ? `mailto:${to}` : to;
@@ -29,10 +27,10 @@ const SimpleLink = ({
   
   return (
     <Link href={renderLink()} target="_blank">
-      { type && <FontAwesomeIcon icon={renderIcon()}/> }
+      { type && type === 'link' ? <LinkIcon width="16" /> : <AtIcon width="16" /> }
       {children}
     </Link>
   )
 }
 
-export default SimpleLink;
+export default ExternalLink;
