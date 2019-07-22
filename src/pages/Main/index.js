@@ -7,6 +7,8 @@ import { bindActionCreators } from 'redux';
 import Repository from '../../components/repository';
 import { Container, Row, Column } from '../../components/grid';
 import { Creators as RepositoriesActions } from '../../store/ducks/repositories';
+import NavBar from '../../components/navbar';
+import SearchBar from '../../components/searchbar';
 
 class Main extends Component {
   state = {
@@ -28,22 +30,17 @@ class Main extends Component {
       <Container>
         <Row>
           <Column span="12">
-            <div>
-              <form onSubmit={this.handleSubmit}>
-                <input
-                  type="text"
-                  placeholder="usuário"
-                  value={username}
-                  onChange={e => this.setState({ username: e.target.value })}
-                />
-                <button type="submit">
-                  {loading ? <i className="fa fa-spinner fa-pulse" /> : 'Ok'}
-                </button>
-              </form>
-              {data.map(repository => (
-                <Repository key={repository.id} {...repository} />
-              ))}
-            </div>
+            <NavBar>
+              <SearchBar 
+                onSubmit={this.handleSubmit}
+                keyword={username}
+                onChange={e => this.setState({ username: e.target.value })}
+                isLoading={loading}
+              />
+            </NavBar>
+            {data.map(repository => (
+              <Repository key={repository.id} {...repository} />
+            ))}
           </Column>
         </Row>
       </Container>
