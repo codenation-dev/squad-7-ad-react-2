@@ -8,7 +8,7 @@ import Routes from './routes';
 import GlobalStyle from './styles/global';
 import NavBar from './components/navbar';
 
-function App() {
+const App = () => {
   return (
     <Provider store={store}>
       <GlobalStyle />
@@ -16,6 +16,6 @@ function App() {
       <Routes />
     </Provider>
   );
-}
+};
 
 export default App;

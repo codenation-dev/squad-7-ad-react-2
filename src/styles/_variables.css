@@ -16,7 +16,8 @@
   --border-color: var(--gray-scale-2);
   --container-max-width: 960px;
   --header-height: 80px;
-  --shadow: 3px 0px 10px rgba(var(--black), 0.15);
+  --shadow-light: 3px 0px 10px rgba(0,0,0, 0.15);
+  --shadow-medium: 0px 4px 4px rgba(0,0,0, 0.25);
 
   --font-size-base: 16px;
   --font-size-extra-large: 48px;
