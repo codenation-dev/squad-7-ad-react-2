@@ -1,12 +1,12 @@
 import React, { useState } from 'react';
-import styled from 'styled-components'
+import styled from 'styled-components';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { bindActionCreators } from 'redux'
+import { bindActionCreators } from 'redux';
 
 import { Creators as RepositoriesActions } from '../../store/ducks/repositories';
 import { Container as _Container } from '../grid';
-import { Nav, Logo } from './style.js';
+import { Nav, Logo } from './style';
 import SearchBar from '../searchbar';
 
 const Container = styled(_Container)`
@@ -14,12 +14,9 @@ const Container = styled(_Container)`
   justify-content: space-between;
   height: 80px;
   align-items: center;
-`
+`;
 
-const NavBar = ({
-  getRepositoriesRequest,
-  repositories
-}) => {
+const NavBar = ({ getRepositoriesRequest, repositories }) => {
   const [username, setUsername] = useState('');
   const { loading } = repositories;
 
@@ -32,7 +29,7 @@ const NavBar = ({
     <Nav>
       <Container fluid>
         <Logo>Squad7</Logo>
-        <SearchBar 
+        <SearchBar
           onSubmit={handleSubmit}
           keyword={username}
           onChange={e => setUsername(e.target.value)}
@@ -40,8 +37,8 @@ const NavBar = ({
         />
       </Container>
     </Nav>
-  )
-}
+  );
+};
 
 NavBar.propTypes = {
   getRepositoriesRequest: PropTypes.func.isRequired,
@@ -62,4 +59,3 @@ export default connect(
   mapStateToProps,
   mapDispatchToProps
 )(NavBar);
-
