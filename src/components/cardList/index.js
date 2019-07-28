@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import CardItem from '../cardItem';
+import MessageNotFound from '../../components/messageNotFound';
 
 const RepoOrder = (a, b) => {
   if (a.created_at < b.created_at) return 1;
@@ -9,11 +10,15 @@ const RepoOrder = (a, b) => {
 };
 
 const CardList = ({ repositories }) =>
-  repositories
-    .sort(RepoOrder)
-    .map(repository => (
-      <CardItem key={repository.id} repository={repository} />
-    ));
+  repositories.length ? (
+    repositories
+      .sort(RepoOrder)
+      .map(repository => (
+        <CardItem key={repository.id} repository={repository} />
+      ))
+  ) : (
+    <MessageNotFound />
+  );
 
 CardList.propTypes = {
   repositories: PropTypes.arrayOf(

@@ -34,6 +34,7 @@ const NavBar = ({ getRepositoriesRequest, repositories }) => {
           keyword={username}
           onChange={e => setUsername(e.target.value)}
           isLoading={loading}
+          text="github.com/"
         />
       </Container>
     </Nav>
