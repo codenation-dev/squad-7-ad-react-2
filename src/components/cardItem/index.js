@@ -8,18 +8,22 @@ import {
   StyledCardItem,
   Title,
   Meta,
+  Language,
+  StartDate,
   Status,
   Info,
   StatusForks,
   StatusStars,
   Description,
+
 } from './style';
 
 const CardItem = ({ repository }) => (
   <StyledCardItem>
     <Title>{repository.name}</Title>
     <Meta>
-      {repository.language} - {moment(repository.created_at).format('DD/MM/YY')}
+      {repository.language && <Language>{repository.language}</Language>}
+      <StartDate>{moment(repository.created_at).format('DD/MM/YY')}</StartDate>
     </Meta>
     <Info>
       <Description>{repository.description}</Description>
