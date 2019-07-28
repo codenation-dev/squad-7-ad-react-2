@@ -29,6 +29,16 @@ export const Meta = styled.div`
   font-weight: 500;
 `;
 
+export const Language = styled.span`
+  &:after {
+    content: '•';
+    margin: 0px 4px;
+  }
+`;
+
+export const StartDate = styled.span`
+`;
+
 export const Info = styled.div`
   color: var(--gray-scale-4);
   display: flex;
