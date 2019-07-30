@@ -8,7 +8,7 @@ import ExternalLink from '../../components/link';
 
 it('should render the UserAbout', () => {
   const wrapper = mount(<UserAbout />);
-  console.log(wrapper);
+
   expect(wrapper.find(StyledCard).exists()).toBe(true);
   expect(wrapper.find(CardHeader).exists()).toBe(true);
   expect(wrapper.find(ExternalLink).exists()).toBe(true);
