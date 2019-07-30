@@ -4,8 +4,7 @@ export const StyledCard = styled.div`
   display: flex;
   flex-direction: column;
   background: var(--white);
-  max-width: 594px;
-  box-shadow: var(--shadow-medium);
+  border: 1px solid var(--gray-scale-2);
 `;
 
 export const CardHeader = styled.div`
