@@ -8,7 +8,13 @@ export function* getRepositories(action) {
   try {
     const response = yield call(
       api.get,
-      `/users/${action.payload.username}/repos`
+      `/users/${action.payload.username}/repos`,
+      {
+        params: {
+          sort: 'created',
+          per_page: '6'
+        },
+      }
     );
     yield put(RepositoriesActions.getRepositoriesSuccess(response.data));
   } catch (err) {
