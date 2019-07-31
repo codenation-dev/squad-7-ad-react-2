@@ -19,16 +19,22 @@ const Container = styled(_Container)`
   margin-top: 16px;
 `;
 
-const userMock = {
-  avatar_url: 'https://avatars2.githubusercontent.com/u/42302?v=4',
-  name: 'User Name',
+const getProfile = repositories => {
+  if (repositories.data.length) {
+    const { login: name, avatar_url: avatarUrl } = repositories.data[0].owner;
+    return {
+      name,
+      avatarUrl,
+    };
+  }
+  return {};
 };
 
 const Main = ({ repositories }) => (
   <Container>
     <Row>
       <Column span="4">
-        <UserAbout profile={userMock} />
+        <UserAbout profile={getProfile(repositories)} />
       </Column>
 
       <Column span="8">

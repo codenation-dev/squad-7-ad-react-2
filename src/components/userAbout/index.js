@@ -17,7 +17,7 @@ const UserAbout = ({ profile }) => {
   return (
     <StyledCard>
       <CardHeader>
-        <UserProfile avatarUrl={profile.avatar_url} name={profile.name} />
+        <UserProfile avatarUrl={profile.avatarUrl} name={profile.name} />
       </CardHeader>
 
       <CardContent>
