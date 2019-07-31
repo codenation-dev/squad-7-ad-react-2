@@ -6849,9 +6849,9 @@ natural-compare@^1.4.0:
   integrity sha1-Sr6/7tdUHywnrPspvbvRXI1bpPc=
 
 nearley@^2.7.10:
-  version "2.17.0"
-  resolved "https://registry.yarnpkg.com/nearley/-/nearley-2.17.0.tgz#61d2f933c37d72671336d8f934ee1f82bceba86d"
-  integrity sha512-duA4zGPF0EC93e0UNqCowBiZg6wnBKUazA1YSYoyJDKx24dPqNITBZb3dp/e92wTdyeGKe+ng1iOTWn69FiGEQ==
+  version "2.18.0"
+  resolved "https://registry.yarnpkg.com/nearley/-/nearley-2.18.0.tgz#a9193612dd6d528a2e47e743b1dc694cfe105223"
+  integrity sha512-/zQOMCeJcioI0xJtd5RpBiWw2WP7wLe6vq8/3Yu0rEwgus/G/+pViX80oA87JdVgjRt2895mZSv2VfZmy4W1uw==
   dependencies:
     commander "^2.19.0"
     moo "^0.4.3"
