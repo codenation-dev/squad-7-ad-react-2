@@ -1,6 +1,6 @@
 import repositoriesReducer, {
   Creators as RepositoriesActions,
-} from '../../../store/ducks/repositories';
+} from '../../store/ducks/repositories';
 
 describe('Repositories Reducer', () => {
   it('should be able to get repositories', () => {
