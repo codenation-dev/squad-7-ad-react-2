@@ -12,7 +12,7 @@ export function* getRepositories(action) {
       {
         params: {
           sort: 'created',
-          per_page: '6'
+          per_page: '6',
         },
       }
     );
