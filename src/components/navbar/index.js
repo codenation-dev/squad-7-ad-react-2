@@ -23,6 +23,7 @@ const NavBar = ({ getRepositoriesRequest, repositories }) => {
   const handleSubmit = e => {
     e.preventDefault();
     getRepositoriesRequest(username);
+    setUsername('');
   };
 
   return (
