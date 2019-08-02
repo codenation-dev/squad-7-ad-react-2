@@ -7,8 +7,6 @@ export const StyledMessage = styled.div`
   padding: 50px 48px;
   margin: 30px auto;
   max-width: 930px;
-  border: 1px solid var(--gray-scale-2);
-  border-radius: 2px;
 `;
 
 export const Header = styled.h1`
