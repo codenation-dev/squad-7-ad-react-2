@@ -1,7 +1,7 @@
-import React from 'react';
+import React, { Fragment } from 'react';
 import PropTypes from 'prop-types';
 import CardItem from '../cardItem';
-import MessageNotFound from '../../components/messageNotFound';
+import MessageNotFound from '../messageNotFound';
 
 const RepoOrder = (a, b) => {
   if (a.created_at < b.created_at) return 1;
@@ -9,16 +9,18 @@ const RepoOrder = (a, b) => {
   return 0;
 };
 
-const CardList = ({ repositories }) =>
-  repositories.length ? (
-    repositories
-      .sort(RepoOrder)
-      .map(repository => (
-        <CardItem key={repository.id} repository={repository} />
-      ))
-  ) : (
-    <MessageNotFound />
-  );
+const CardList = ({ repositories, error }) => (
+  <Fragment>
+    {error && <MessageNotFound />}
+    {!error &&
+      repositories.length > 0 &&
+      repositories
+        .sort(RepoOrder)
+        .map(repository => (
+          <CardItem key={repository.id} repository={repository} />
+        ))}
+  </Fragment>
+);
 
 CardList.propTypes = {
   repositories: PropTypes.arrayOf(
@@ -26,6 +28,7 @@ CardList.propTypes = {
       id: PropTypes.number,
     })
   ),
+  error: PropTypes.bool.isRequired,
 };
 
 CardList.defaultProps = {

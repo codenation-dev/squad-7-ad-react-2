@@ -12,7 +12,7 @@ const Main = ({ repositories }) => (
   <Container fluid>
     <Row>
       <Column span="12">
-        <CardList repositories={repositories.data} />
+        <CardList repositories={repositories.data} error={repositories.error} />
       </Column>
     </Row>
   </Container>
@@ -21,6 +21,7 @@ const Main = ({ repositories }) => (
 Main.propTypes = {
   repositories: PropTypes.shape({
     data: PropTypes.arrayOf(PropTypes.shape({})),
+    error: PropTypes.bool,
   }).isRequired,
 };
 
