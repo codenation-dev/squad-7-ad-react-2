@@ -9,6 +9,7 @@ import { Column, Container as _Container, Row } from '../../components/grid';
 import { Creators as RepositoriesActions } from '../../store/ducks/repositories';
 import CardList from '../../components/cardList';
 import UserAbout from '../../components/userAbout';
+import Summary from '../../components/summary';
 import {
   CardContent,
   CardHeader,
@@ -30,11 +31,12 @@ const getProfile = repositories => {
   return {};
 };
 
-const Main = ({ repositories }) => (
+const Main = ({ repositories, summary }) => (
   <Container>
     <Row>
       <Column span="4">
         <UserAbout profile={getProfile(repositories)} />
+        <Summary summary={summary} />
       </Column>
 
       <Column span="8">
@@ -53,10 +55,27 @@ Main.propTypes = {
   repositories: PropTypes.shape({
     data: PropTypes.arrayOf(PropTypes.shape({})),
   }).isRequired,
+  summary: PropTypes.arrayOf(PropTypes.shape({})).isRequired,
 };
+
+const groupByYear = repos =>
+  repos
+    .map(repo => new Date(repo.created_at).getFullYear())
+    .reduce((result, year, i, array) => {
+      if (!result.find(item => item.year === year))
+        result.push({
+          year,
+          count: array.reduce((sum, item) => {
+            if (item === year) sum += 1;
+            return sum;
+          }, 0),
+        });
+      return result;
+    }, []);
 
 const mapStateToProps = state => ({
   repositories: state.repositories,
+  summary: groupByYear(state.repositories.data),
 });
 
 const mapDispatchToProps = dispatch =>
