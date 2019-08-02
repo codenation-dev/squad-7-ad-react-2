@@ -12,11 +12,17 @@ export function* getRepositories(action) {
       {
         params: {
           sort: 'created',
-          per_page: '6'
+          per_page: '6',
+          page: action.payload.pageNumber,
         },
       }
     );
-    yield put(RepositoriesActions.getRepositoriesSuccess(response.data));
+    yield put(
+      RepositoriesActions.getRepositoriesSuccess(
+        response,
+        action.payload.username
+      )
+    );
   } catch (err) {
     yield put(RepositoriesActions.getRepositoriesFailure());
   }

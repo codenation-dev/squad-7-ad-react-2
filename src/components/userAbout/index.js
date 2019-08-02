@@ -1,11 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
-import {
-  CardContent as _CardContent,
-  CardHeader,
-  StyledCard,
-} from '../card/style';
+import { CardContent as _CardContent, CardHeader, StyledCard } from '../card';
 import ExternalLink from '../link';
 import UserProfile from './userProfile';
 

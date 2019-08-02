@@ -1,3 +1,5 @@
+import parse from 'parse-link-header';
+
 /**
  * Types of reducer repositories
  */
@@ -13,8 +15,21 @@ export const Types = {
  */
 
 const INITIAL_STATE = {
+  username: '',
   data: [],
   loading: false,
+  pageCount: 0,
+};
+
+const getPageCount = response => {
+  const parsedLinkHeader = parse(response.headers.link);
+  if (parsedLinkHeader.last) {
+    const {
+      last: { page: pageCount },
+    } = parsedLinkHeader;
+    return parseInt(pageCount, 10);
+  }
+  return 0;
 };
 
 export default function Repositories(state = INITIAL_STATE, action) {
@@ -22,7 +37,16 @@ export default function Repositories(state = INITIAL_STATE, action) {
     case Types.GET_REPOSITORIES_REQUEST:
       return { ...state, loading: true };
     case Types.GET_REPOSITORIES_SUCCESS:
-      return { ...state, loading: false, data: action.payload.data };
+      return {
+        ...state,
+        loading: false,
+        data: action.payload.response.data,
+        username: action.payload.username,
+        pageCount:
+          action.payload.username !== state.username
+            ? getPageCount(action.payload.response)
+            : state.pageCount,
+      };
     case Types.GET_REPOSITORIES_FAILURE:
       return { ...state, loading: false };
     default:
@@ -35,16 +59,14 @@ export default function Repositories(state = INITIAL_STATE, action) {
  */
 
 export const Creators = {
-  getRepositoriesRequest: username => ({
+  getRepositoriesRequest: (username, pageNumber = 1) => ({
     type: Types.GET_REPOSITORIES_REQUEST,
-    payload: { username },
+    payload: { username, pageNumber },
   }),
-
-  getRepositoriesSuccess: data => ({
+  getRepositoriesSuccess: (response, username) => ({
     type: Types.GET_REPOSITORIES_SUCCESS,
-    payload: { data },
+    payload: { response, username },
   }),
-
   getRepositoriesFailure: () => ({
     type: Types.GET_REPOSITORIES_FAILURE,
   }),
