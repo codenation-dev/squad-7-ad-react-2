@@ -27,7 +27,7 @@ const NavBar = ({ getRepositoriesRequest, repositories }) => {
 
   return (
     <Nav>
-      <Container fluid>
+      <Container>
         <Logo>Squad7</Logo>
         <SearchBar
           onSubmit={handleSubmit}
