@@ -4,10 +4,9 @@ import CardItem from '../cardItem';
 
 const CardList = ({ repositories }) =>
   repositories.length > 0 &&
-  repositories
-    .map(repository => (
-      <CardItem key={repository.id} repository={repository} />
-    ));
+  repositories.map(repository => (
+    <CardItem key={repository.id} repository={repository} />
+  ));
 
 CardList.propTypes = {
   repositories: PropTypes.arrayOf(

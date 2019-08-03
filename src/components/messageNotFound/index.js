@@ -44,14 +44,6 @@ class MessageNotFound extends Component {
   }
 }
 
-const mapDispatchToProps = dispatch =>
-  bindActionCreators(RepositoriesActions, dispatch);
-
-export default connect(
-  null,
-  mapDispatchToProps
-)(MessageNotFound);
-
 MessageNotFound.propTypes = {
   header: PropTypes.string,
   text: PropTypes.string,
@@ -63,3 +55,11 @@ MessageNotFound.defaultProps = {
   text:
     'Não encontramos o usuário que você está buscando. Deseja realizar uma nova pesquisa?',
 };
+
+const mapDispatchToProps = dispatch =>
+  bindActionCreators(RepositoriesActions, dispatch);
+
+export default connect(
+  null,
+  mapDispatchToProps
+)(MessageNotFound);
