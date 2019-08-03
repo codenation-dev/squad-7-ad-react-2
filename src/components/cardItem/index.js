@@ -15,7 +15,6 @@ import {
   StatusForks,
   StatusStars,
   Description,
-
 } from './style';
 
 const CardItem = ({ repository }) => (

@@ -6,12 +6,13 @@ const SearchBar = ({
   onSubmit,
   keyword,
   onChange,
-  isLoading
+  isLoading,
+  text = ""
 }) => {
   
   return (
     <Form onSubmit={onSubmit}>
-      <Text>github.com/</Text>
+      {text && <Text>{text}</Text>}
       <SearchInput 
         value={keyword} 
         placeholder="Digite o usuário do Github" 

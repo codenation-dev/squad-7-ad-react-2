@@ -9,6 +9,7 @@ import { Column, Container as _Container, Row } from '../../components/grid';
 import { Creators as RepositoriesActions } from '../../store/ducks/repositories';
 import CardList from '../../components/cardList';
 import UserAbout from '../../components/userAbout';
+import MessageNotFound from '../../components/messageNotFound';
 import {
   CardContent,
   CardHeader,
@@ -32,26 +33,33 @@ const getProfile = repositories => {
 
 const Main = ({ repositories }) => (
   <Container>
-    <Row>
-      <Column span="4">
-        <UserAbout profile={getProfile(repositories)} />
-      </Column>
-
-      <Column span="8">
-        <StyledCard>
-          <CardHeader>REPOSITÓRIOS</CardHeader>
-          <CardContent>
-            <CardList repositories={repositories.data} />
-          </CardContent>
-        </StyledCard>
-      </Column>
-    </Row>
+    {repositories.error ? (
+      <MessageNotFound />
+    ) : (
+      !repositories.loading && (
+        <Row>
+          <Column span="4">
+            <UserAbout profile={getProfile(repositories)} />
+          </Column>
+          <Column span="8">
+            <StyledCard>
+              <CardHeader>REPOSITÓRIOS</CardHeader>
+              <CardContent>
+                <CardList repositories={repositories.data} />
+              </CardContent>
+            </StyledCard>
+          </Column>
+        </Row>
+      )
+    )}
   </Container>
 );
 
 Main.propTypes = {
   repositories: PropTypes.shape({
     data: PropTypes.arrayOf(PropTypes.shape({})),
+    error: PropTypes.bool,
+    loading: PropTypes.bool,
   }).isRequired,
 };
 

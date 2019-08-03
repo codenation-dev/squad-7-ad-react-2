@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import CardItem from '../cardItem';
 
 const CardList = ({ repositories }) =>
+  repositories.length > 0 &&
   repositories.map(repository => (
     <CardItem key={repository.id} repository={repository} />
   ));
@@ -13,6 +14,7 @@ CardList.propTypes = {
       id: PropTypes.number,
     })
   ),
+  error: PropTypes.bool.isRequired,
 };
 
 CardList.defaultProps = {
