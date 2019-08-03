@@ -23,6 +23,7 @@ const NavBar = ({ getRepositoriesRequest, repositories }) => {
   const handleSubmit = e => {
     e.preventDefault();
     getRepositoriesRequest(username);
+    setUsername('');
   };
 
   return (
@@ -34,6 +35,7 @@ const NavBar = ({ getRepositoriesRequest, repositories }) => {
           keyword={username}
           onChange={e => setUsername(e.target.value)}
           isLoading={loading}
+          text="github.com/"
         />
       </Container>
     </Nav>

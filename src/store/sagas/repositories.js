@@ -6,7 +6,7 @@ import { Creators as RepositoriesActions } from '../ducks/repositories';
 
 export function* getRepositories(action) {
   try {
-    const response = yield call(
+    const responseRepos = yield call(
       api.get,
       `/users/${action.payload.username}/repos`,
       {
@@ -17,10 +17,15 @@ export function* getRepositories(action) {
         },
       }
     );
+    const responseUserProfile = yield call(
+      api.get,
+      `/users/${action.payload.username}`
+    );
     yield put(
       RepositoriesActions.getRepositoriesSuccess(
-        response,
-        action.payload.username
+        responseRepos,
+        responseUserProfile,
+        action.payload.pageNumber - 1
       )
     );
   } catch (err) {

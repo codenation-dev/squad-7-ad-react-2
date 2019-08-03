@@ -16,9 +16,15 @@ export const Types = {
 
 const INITIAL_STATE = {
   username: '',
+  userId: null,
+  avatarUrl: '',
+  email: '',
+  blog: '',
   data: [],
-  loading: false,
   pageCount: 0,
+  pageIndex: 0,
+  error: false,
+  loading: false,
 };
 
 const getPageCount = response => {
@@ -35,20 +41,34 @@ const getPageCount = response => {
 export default function Repositories(state = INITIAL_STATE, action) {
   switch (action.type) {
     case Types.GET_REPOSITORIES_REQUEST:
-      return { ...state, loading: true };
-    case Types.GET_REPOSITORIES_SUCCESS:
+      return { ...state, loading: true, error: false };
+    case Types.GET_REPOSITORIES_SUCCESS: {
+      const {
+        id: userId,
+        login: username,
+        avatar_url: avatarUrl,
+        email,
+        blog,
+      } = action.payload.responseUserProfile.data;
       return {
         ...state,
-        loading: false,
-        data: action.payload.response.data,
-        username: action.payload.username,
+        username,
+        userId,
+        avatarUrl,
+        email,
+        blog,
+        data: action.payload.responseRepos.data,
         pageCount:
-          action.payload.username !== state.username
-            ? getPageCount(action.payload.response)
+          userId !== state.userId
+            ? getPageCount(action.payload.responseRepos)
             : state.pageCount,
+        pageIndex: userId !== state.userId ? 0 : action.payload.pageIndex,
+        loading: false,
+        error: false,
       };
+    }
     case Types.GET_REPOSITORIES_FAILURE:
-      return { ...state, loading: false };
+      return { data: [], loading: false, error: true };
     default:
       return state;
   }
@@ -63,9 +83,9 @@ export const Creators = {
     type: Types.GET_REPOSITORIES_REQUEST,
     payload: { username, pageNumber },
   }),
-  getRepositoriesSuccess: (response, username) => ({
+  getRepositoriesSuccess: (responseRepos, responseUserProfile, pageIndex) => ({
     type: Types.GET_REPOSITORIES_SUCCESS,
-    payload: { response, username },
+    payload: { responseRepos, responseUserProfile, pageIndex },
   }),
   getRepositoriesFailure: () => ({
     type: Types.GET_REPOSITORIES_FAILURE,

@@ -9,17 +9,24 @@ const CardContent = styled(_CardContent)`
   padding: 16px;
 `;
 
+const hasEmailOrBlog = profile => profile.email || profile.blog;
+
 const UserAbout = ({ profile }) => {
   return (
     <StyledCard>
       <CardHeader>
-        <UserProfile avatarUrl={profile.avatarUrl} name={profile.name} />
+        <UserProfile avatarUrl={profile.avatarUrl} name={profile.username} />
       </CardHeader>
-
-      <CardContent>
-        <ExternalLink type="link">github.com</ExternalLink>
-        <ExternalLink type="email">user@gmail.com</ExternalLink>
-      </CardContent>
+      {hasEmailOrBlog(profile) && (
+        <CardContent>
+          {profile.blog && (
+            <ExternalLink type="link">{profile.blog}</ExternalLink>
+          )}
+          {profile.email && (
+            <ExternalLink type="email">{profile.email}</ExternalLink>
+          )}
+        </CardContent>
+      )}
     </StyledCard>
   );
 };
