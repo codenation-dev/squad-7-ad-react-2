@@ -1,26 +1,17 @@
-import React from 'react';
-import PropTypes from 'prop-types';
-import CardList from '../cardList';
-import { StyledCard, CardHeader, CardContent } from './style';
-import repositories from '../../sample_data/repositories.json';
+import styled from 'styled-components';
 
-const Card = ({ title }) => {
-  return (
-    <StyledCard>
-      <CardHeader>{title}</CardHeader>
-      <CardContent>
-        <CardList repositories={repositories} />
-      </CardContent>
-    </StyledCard>
-  );
-};
+export const StyledCard = styled.div`
+  display: flex;
+  flex-direction: column;
+  background: var(--white);
+  border: 1px solid var(--gray-scale-2);
+`;
 
-Card.propTypes = {
-  title: PropTypes.string,
-};
+export const CardHeader = styled.div`
+  border-bottom: 1px solid var(--border-color);
+  padding: 16px;
+`;
 
-Card.defaultProps = {
-  title: 'REPOSITÓRIOS',
-};
-
-export default Card;
+export const CardContent = styled.div`
+  padding: 0;
+`;

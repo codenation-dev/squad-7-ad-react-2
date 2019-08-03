@@ -6,17 +6,28 @@ import { Creators as RepositoriesActions } from '../ducks/repositories';
 
 export function* getRepositories(action) {
   try {
-    const response = yield call(
+    const responseRepos = yield call(
       api.get,
       `/users/${action.payload.username}/repos`,
       {
         params: {
           sort: 'created',
           per_page: '6',
+          page: action.payload.pageNumber,
         },
       }
     );
-    yield put(RepositoriesActions.getRepositoriesSuccess(response.data));
+    const responseUserProfile = yield call(
+      api.get,
+      `/users/${action.payload.username}`
+    );
+    yield put(
+      RepositoriesActions.getRepositoriesSuccess(
+        responseRepos,
+        responseUserProfile,
+        action.payload.pageNumber - 1
+      )
+    );
   } catch (err) {
     yield put(RepositoriesActions.getRepositoriesFailure());
   }

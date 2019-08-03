@@ -14,7 +14,6 @@ CardList.propTypes = {
       id: PropTypes.number,
     })
   ),
-  error: PropTypes.bool.isRequired,
 };
 
 CardList.defaultProps = {

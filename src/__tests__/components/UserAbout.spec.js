@@ -2,7 +2,7 @@ import React from 'react';
 import { mount } from 'enzyme';
 
 import UserAbout from '../../components/userAbout';
-import { CardHeader, StyledCard } from '../../components/card/style';
+import { CardHeader, StyledCard } from '../../components/card';
 import UserProfile from '../../components/userAbout/userProfile';
 import ExternalLink from '../../components/link';
 

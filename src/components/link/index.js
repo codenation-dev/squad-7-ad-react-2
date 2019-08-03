@@ -13,10 +13,10 @@ const LinkIcon = styled(_Link)`
   margin-right: 5px;
 `;
 
-const ExternalLink = ({ children, type, to }) => {
+const ExternalLink = ({ children, type }) => {
   const renderLink = () => {
     if (type) {
-      return type === 'email' ? `mailto:${to}` : to;
+      return type === 'email' ? `mailto:${children}` : children;
     }
   };
 
