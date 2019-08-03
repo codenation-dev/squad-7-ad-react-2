@@ -90,6 +90,8 @@ Main.propTypes = {
     error: PropTypes.bool,
     username: PropTypes.string,
     avatarUrl: PropTypes.string,
+    email: PropTypes.string,
+    blog: PropTypes.string,
   }).isRequired,
 };
 
