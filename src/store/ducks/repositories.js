@@ -28,14 +28,15 @@ const INITIAL_STATE = {
 };
 
 const getPageCount = response => {
+  let pageCount = 0;
   const parsedLinkHeader = parse(response.headers.link);
-  if (parsedLinkHeader.last) {
-    const {
+  if (parsedLinkHeader && parsedLinkHeader.last) {
+    ({
       last: { page: pageCount },
-    } = parsedLinkHeader;
+    } = parsedLinkHeader);
     return parseInt(pageCount, 10);
   }
-  return 0;
+  return pageCount;
 };
 
 export default function Repositories(state = INITIAL_STATE, action) {
@@ -43,6 +44,7 @@ export default function Repositories(state = INITIAL_STATE, action) {
     case Types.GET_REPOSITORIES_REQUEST:
       return { ...state, loading: true, error: false };
     case Types.GET_REPOSITORIES_SUCCESS: {
+      console.log(state, action);
       const {
         id: userId,
         login: username,
