@@ -36,7 +36,6 @@ describe('Repositories Saga', () => {
       initialAction
     ).toPromise();
 
-    console.log('dispatched', dispatched[0].payload.responseRepos.data);
     expect(dispatched[0].type).toBe(RepositoriesTypes.GET_REPOSITORIES_SUCCESS);
     expect(dispatched[0].payload.responseRepos.data).toStrictEqual([
       'repo 1',
