@@ -10,6 +10,7 @@ import { Column, Container as _Container, Row } from '../../components/grid';
 import { Creators as RepositoriesActions } from '../../store/ducks/repositories';
 import CardList from '../../components/cardList';
 import UserAbout from '../../components/userAbout';
+import Summary from '../../components/summary';
 import { CardContent, CardHeader, StyledCard } from '../../components/card';
 import MessageNotFound from '../../components/messageNotFound';
 import '../../styles/react-paginate.css';
@@ -30,7 +31,7 @@ const getProfile = repositories => {
   return profile;
 };
 
-const Main = ({ getRepositoriesRequest, repositories }) => {
+const Main = ({ getRepositoriesRequest, repositories, summary }) => {
   const onPageChange = pageIndex => {
     const pageNumber = pageIndex.selected + 1;
     getRepositoriesRequest(repositories.username, pageNumber);
@@ -43,6 +44,7 @@ const Main = ({ getRepositoriesRequest, repositories }) => {
         <Row>
           <Column span="4">
             <UserAbout profile={getProfile(repositories)} />
+            {summary.length > 0 && <Summary summary={summary} />}
           </Column>
           <Column span="8">
             <StyledCard>
@@ -51,7 +53,7 @@ const Main = ({ getRepositoriesRequest, repositories }) => {
                 <CardList repositories={repositories.data} />
               </CardContent>
             </StyledCard>
-            {repositories.data.length > 0 ? (
+            {repositories.data.length > 0 && repositories.pageCount > 0 ? (
               <ReactPaginate
                 onPageChange={onPageChange}
                 pageCount={repositories.pageCount}
@@ -93,10 +95,27 @@ Main.propTypes = {
     email: PropTypes.string,
     blog: PropTypes.string,
   }).isRequired,
+  summary: PropTypes.arrayOf(PropTypes.shape({})).isRequired,
 };
+
+const groupByYear = repos =>
+  repos
+    .map(repo => new Date(repo.created_at).getFullYear())
+    .reduce((result, year, i, array) => {
+      if (!result.find(item => item.year === year))
+        result.push({
+          year,
+          count: array.reduce((sum, item) => {
+            if (item === year) sum += 1;
+            return sum;
+          }, 0),
+        });
+      return result;
+    }, []);
 
 const mapStateToProps = state => ({
   repositories: state.repositories,
+  summary: groupByYear(state.repositories.data),
 });
 
 const mapDispatchToProps = dispatch =>
