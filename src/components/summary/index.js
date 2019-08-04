@@ -10,8 +10,8 @@ const Summary = ({ summary }) => {
         <SummaryItem key={item.year}>
           {item.year}
           <Info>
-            <Count>{item.count}</Count>
             <Repo color="#afafaf" size="14" />
+            <Count>{item.count}</Count>
           </Info>
         </SummaryItem>
       ))}

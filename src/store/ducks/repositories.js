@@ -1,3 +1,5 @@
+import parse from 'parse-link-header';
+
 /**
  * Types of reducer repositories
  */
@@ -13,18 +15,62 @@ export const Types = {
  */
 
 const INITIAL_STATE = {
+  username: '',
+  userId: null,
+  avatarUrl: '',
+  email: '',
+  blog: '',
   data: [],
+  pageCount: 0,
+  pageIndex: 0,
+  error: false,
   loading: false,
+};
+
+const getPageCount = response => {
+  let pageCount = 0;
+  const parsedLinkHeader = parse(response.headers.link);
+  if (parsedLinkHeader && parsedLinkHeader.last) {
+    ({
+      last: { page: pageCount },
+    } = parsedLinkHeader);
+    return parseInt(pageCount, 10);
+  }
+  return pageCount;
 };
 
 export default function Repositories(state = INITIAL_STATE, action) {
   switch (action.type) {
     case Types.GET_REPOSITORIES_REQUEST:
-      return { ...state, loading: true };
-    case Types.GET_REPOSITORIES_SUCCESS:
-      return { ...state, loading: false, data: action.payload.data };
+      return { ...state, loading: true, error: false };
+    case Types.GET_REPOSITORIES_SUCCESS: {
+      console.log(state, action);
+      const {
+        id: userId,
+        login: username,
+        avatar_url: avatarUrl,
+        email,
+        blog,
+      } = action.payload.responseUserProfile.data;
+      return {
+        ...state,
+        username,
+        userId,
+        avatarUrl,
+        email,
+        blog,
+        data: action.payload.responseRepos.data,
+        pageCount:
+          userId !== state.userId
+            ? getPageCount(action.payload.responseRepos)
+            : state.pageCount,
+        pageIndex: userId !== state.userId ? 0 : action.payload.pageIndex,
+        loading: false,
+        error: false,
+      };
+    }
     case Types.GET_REPOSITORIES_FAILURE:
-      return { ...state, loading: false };
+      return { data: [], loading: false, error: true };
     default:
       return state;
   }
@@ -35,16 +81,14 @@ export default function Repositories(state = INITIAL_STATE, action) {
  */
 
 export const Creators = {
-  getRepositoriesRequest: username => ({
+  getRepositoriesRequest: (username, pageNumber = 1) => ({
     type: Types.GET_REPOSITORIES_REQUEST,
-    payload: { username },
+    payload: { username, pageNumber },
   }),
-
-  getRepositoriesSuccess: data => ({
+  getRepositoriesSuccess: (responseRepos, responseUserProfile, pageIndex) => ({
     type: Types.GET_REPOSITORIES_SUCCESS,
-    payload: { data },
+    payload: { responseRepos, responseUserProfile, pageIndex },
   }),
-
   getRepositoriesFailure: () => ({
     type: Types.GET_REPOSITORIES_FAILURE,
   }),

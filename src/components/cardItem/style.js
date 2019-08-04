@@ -1,7 +1,6 @@
 import styled from 'styled-components';
 
 export const StyledCardItem = styled.div`
-  cursor: pointer;
   transition: all 0.3s;
   padding: 16px;
   border-bottom: 1px solid var(--border-color);

@@ -1,0 +1,30 @@
+.pagination {
+  display: flex;
+  justify-content: center;
+  margin-top: 10px;
+}
+
+a.page-link {
+  cursor: pointer;
+  position: relative;
+  display: block;
+  padding: 0.5rem 9.2px;
+  margin-left: -1px;
+  line-height: 1.25;
+  color: var(--primary);
+  background-color: var(--white);
+  border: 1px solid var(--border-color);
+  margin-top: 15px;
+}
+
+.page-item.active .page-link {
+  z-index: 1;
+  color: var(--white);
+  background-color: var(--primary);
+  border-color: var(--primary);
+}
+
+.page-item.disabled .page-link {
+    color: var(--gray-scale-3);
+  }
+  

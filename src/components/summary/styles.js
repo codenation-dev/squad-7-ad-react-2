@@ -6,6 +6,7 @@ export const Container = styled.div`
   width: 100%;
   background: var(--white);
   border: 1px solid var(--gray-scale-2);
+  border-top-width: 0;
   padding: 8px;
 `;
 
@@ -21,8 +22,9 @@ export const SummaryItem = styled.div`
 
 export const Count = styled.p`
   color: var(--gray-scale-4);
-  font-size: var(--font-size-small);
+  font-size: var(--font-size-medium);
   font-weight: 500;
+  margin-left: 0.5px;
 `;
 
 export const Info = styled.div`
