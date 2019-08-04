@@ -13,11 +13,12 @@ describe('Repositories Saga', () => {
     const initialAction = {
       payload: {
         username: 'facebook',
-        pageNumber: 1
+        pageNumber: 1,
       },
     };
 
     apiMock.onGet(`/users/${initialAction.payload.username}/repos`).reply(200);
+    apiMock.onGet(`/users/${initialAction.payload.username}`).reply(200);
 
     await runSaga(
       {
@@ -26,9 +27,13 @@ describe('Repositories Saga', () => {
       getRepositories,
       initialAction
     ).toPromise();
-
-    expect(dispatched).toContainEqual(
-      RepositoriesActions.getRepositoriesSuccess(['repo 1', 'repo 2'])
+    
+    expect(dispatched).toEqual(
+      expect.arrayContaining([
+        expect.objectContaining({
+          type: 'repositories/GET_REPOSITORIES_SUCCESS',
+        }),
+      ])
     );
   });
 
