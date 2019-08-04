@@ -11,6 +11,5 @@ it('should render the UserAbout', () => {
 
   expect(wrapper.find(StyledCard).exists()).toBe(true);
   expect(wrapper.find(CardHeader).exists()).toBe(true);
-  expect(wrapper.find(ExternalLink).exists()).toBe(true);
   expect(wrapper.find(UserProfile).exists()).toBe(true);
 });

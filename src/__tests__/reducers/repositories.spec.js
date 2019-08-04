@@ -13,14 +13,44 @@ describe('Repositories Reducer', () => {
   });
 
   it('should return success on getting repositories', () => {
-    const repo = [{ repo: 'test' }];
+    const responseRepos = {
+      data: [
+        {
+          id: 196301648,
+          description: 'a repository to host a list of commom components',
+          stargazers_count: 0,
+          watchers_count: 0,
+          language: 'JavaScript',
+        },
+      ],
+      status: 200,
+      statusText: 'OK',
+      headers: {
+        link:
+          '<https://api.github.com/user/11710943/repos?sort=created&per_page=6&page=2>; rel="next", <https://api.github.com/user/11710943/repos?sort=created&per_page=6&page=2>; rel="last"',
+      },
+    };
+    const responseUserProfile = {
+      data: {
+        login: 'VictorSales',
+        id: 11710943,
+        avatar_url: 'https://avatars0.githubusercontent.com/u/11710943?v=4',
+        blog: 'www.teste.com',
+        email: null,
+      },
+    };
+    const pageIndex = 0;
 
     const state = repositoriesReducer(
       { data: [] },
-      RepositoriesActions.getRepositoriesSuccess(repo)
+      RepositoriesActions.getRepositoriesSuccess(
+        responseRepos,
+        responseUserProfile,
+        pageIndex
+      )
     );
-    console.log(state);
     expect(state.loading).toBe(false);
+    expect(state.error).toBe(false);
     expect(state.data.length).toBe(1);
   });
 
@@ -31,6 +61,8 @@ describe('Repositories Reducer', () => {
     );
 
     expect(state.loading).toBe(false);
+    expect(state.error).toBe(true);
+    expect(state.data).toStrictEqual([]);
   });
 
   it('should return default', () => {

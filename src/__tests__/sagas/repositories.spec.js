@@ -10,20 +10,21 @@ const apiMock = new MockAdapter(api);
 describe('Repositories Saga', () => {
   it('should be able to fetch repositories', async () => {
     const dispatched = [];
-    const action = {
+    const initialAction = {
       payload: {
-        username: 'test-saga',
+        username: 'facebook',
+        pageNumber: 1
       },
     };
 
-    apiMock.onGet('/users/test-saga/repos').reply(200, ['repo 1', 'repo 2']);
+    apiMock.onGet(`/users/${initialAction.payload.username}/repos`).reply(200);
 
     await runSaga(
       {
         dispatch: action => dispatched.push(action),
       },
       getRepositories,
-      action
+      initialAction
     ).toPromise();
 
     expect(dispatched).toContainEqual(
