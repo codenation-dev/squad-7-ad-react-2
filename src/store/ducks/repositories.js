@@ -44,7 +44,6 @@ export default function Repositories(state = INITIAL_STATE, action) {
     case Types.GET_REPOSITORIES_REQUEST:
       return { ...state, loading: true, error: false };
     case Types.GET_REPOSITORIES_SUCCESS: {
-      console.log(state, action);
       const {
         id: userId,
         login: username,
