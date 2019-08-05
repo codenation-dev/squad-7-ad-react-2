@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
@@ -13,6 +13,7 @@ import UserAbout from '../../components/userAbout';
 import { CardContent, CardHeader, StyledCard } from '../../components/card';
 import MessageNotFound from '../../components/messageNotFound';
 import '../../styles/react-paginate.css';
+import CardLink from '../../components/cardLink';
 
 const Container = styled(_Container)`
   margin-top: 16px;
@@ -30,11 +31,38 @@ const getProfile = repositories => {
   return profile;
 };
 
+const getLanguages = repositories => {
+  if (repositories.data.length) {
+    const languages = repositories.data
+      .map(repository => repository.language)
+      .filter(language => !!language)
+      .sort();
+
+    return ['Todos', ...new Set(languages)];
+  }
+
+  return ['Todos'];
+};
+
+const filterRepositories = (repositories, menuActive) => {
+  if (menuActive === 'Todos') {
+    return repositories.data;
+  }
+
+  return repositories.data.filter(
+    repository => repository.language === menuActive
+  );
+};
+
 const Main = ({ getRepositoriesRequest, repositories }) => {
+  const [menuActive, setMenuActive] = useState('Todos');
+
   const onPageChange = pageIndex => {
     const pageNumber = pageIndex.selected + 1;
     getRepositoriesRequest(repositories.username, pageNumber);
   };
+
+  const repositoriesFiltered = filterRepositories(repositories, menuActive);
   return (
     <Container>
       {repositories.error ? (
@@ -43,12 +71,27 @@ const Main = ({ getRepositoriesRequest, repositories }) => {
         <Row>
           <Column span="4">
             <UserAbout profile={getProfile(repositories)} />
+
+            <StyledCard>
+              <CardHeader>LINGUAGENS</CardHeader>
+              <CardContent>
+                {getLanguages(repositories).map((language, idx) => (
+                  <CardLink
+                    key={idx}
+                    title={language}
+                    isActive={menuActive === language}
+                    handleClick={() => setMenuActive(language)}
+                  />
+                ))}
+              </CardContent>
+            </StyledCard>
           </Column>
+
           <Column span="8">
             <StyledCard>
               <CardHeader>REPOSITÓRIOS</CardHeader>
               <CardContent>
-                <CardList repositories={repositories.data} />
+                <CardList repositories={repositoriesFiltered} />
               </CardContent>
             </StyledCard>
             {repositories.data.length > 0 ? (

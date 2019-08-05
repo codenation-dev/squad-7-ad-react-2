@@ -5,6 +5,7 @@ export const StyledCard = styled.div`
   flex-direction: column;
   background: var(--white);
   border: 1px solid var(--gray-scale-2);
+  margin-bottom: 16px;
 `;
 
 export const CardHeader = styled.div`
