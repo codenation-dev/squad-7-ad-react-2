@@ -1,4 +1,4 @@
-## Squad 7 - Aceleradev React
+# Squad 7 - Aceleradev React
 
 * **Bruno Jutkoski**
 
