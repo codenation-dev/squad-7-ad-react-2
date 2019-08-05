@@ -31,3 +31,19 @@ it('should render the MessageNotFound', () => {
 
   expect(wrapper.find(MessageNotFound).exists()).toBe(true);
 });
+
+it('should be able to Change User Name', () => {
+  const wrapper = mount(
+    <Provider store={store}>
+      <MessageNotFound />
+    </Provider>
+  );
+
+  const input = wrapper.find('input');
+  input.simulate('change', { target: { value: 'UserNameTest' } });
+  const messageNotFoundWrapper = wrapper.find('MessageNotFound');
+  const { username } = messageNotFoundWrapper.state();
+  console.log(messageNotFoundWrapper.state());
+
+  expect(username).toBe('UserNameTest');
+});
