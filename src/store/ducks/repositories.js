@@ -28,14 +28,15 @@ const INITIAL_STATE = {
 };
 
 const getPageCount = response => {
+  let pageCount = 0;
   const parsedLinkHeader = parse(response.headers.link);
-  if (parsedLinkHeader.last) {
-    const {
+  if (parsedLinkHeader && parsedLinkHeader.last) {
+    ({
       last: { page: pageCount },
-    } = parsedLinkHeader;
+    } = parsedLinkHeader);
     return parseInt(pageCount, 10);
   }
-  return 0;
+  return pageCount;
 };
 
 export default function Repositories(state = INITIAL_STATE, action) {
