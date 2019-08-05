@@ -3,6 +3,7 @@ import styled from 'styled-components';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
+import { Link, withRouter } from 'react-router-dom';
 
 import { Creators as RepositoriesActions } from '../../store/ducks/repositories';
 import { Container as _Container } from '../grid';
@@ -16,9 +17,9 @@ const Container = styled(_Container)`
   align-items: center;
 `;
 
-const NavBar = ({ getRepositoriesRequest, repositories }) => {
+const NavBar = ({ getRepositoriesRequest, history }) => {
   const [username, setUsername] = useState('');
-  const { loading } = repositories;
+  const pathname = history.location.pathname;
 
   const handleSubmit = e => {
     e.preventDefault();
@@ -26,17 +27,20 @@ const NavBar = ({ getRepositoriesRequest, repositories }) => {
     setUsername('');
   };
 
+  const renderSearch = () => pathname != '/' ? <SearchBar
+    onSubmit={handleSubmit}
+    keyword={username}
+    onChange={e => setUsername(e.target.value)}
+    text="github.com/" />
+    : null;
+
   return (
     <Nav>
       <Container>
-        <Logo>Squad7</Logo>
-        <SearchBar
-          onSubmit={handleSubmit}
-          keyword={username}
-          onChange={e => setUsername(e.target.value)}
-          isLoading={loading}
-          text="github.com/"
-        />
+        <Link to="/">
+          <Logo>Squad7</Logo>
+        </Link>
+        {renderSearch()}
       </Container>
     </Nav>
   );
@@ -57,7 +61,7 @@ const mapStateToProps = state => ({
 const mapDispatchToProps = dispatch =>
   bindActionCreators(RepositoriesActions, dispatch);
 
-export default connect(
+export default withRouter(connect(
   mapStateToProps,
   mapDispatchToProps
-)(NavBar);
+)(NavBar));
