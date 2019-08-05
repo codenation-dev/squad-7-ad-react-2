@@ -31,7 +31,7 @@ const Main = ({ getRepositoriesRequest, repositories, history }) => {
   )
 }
 
-Home.propTypes = {
+Main.propTypes = {
   getRepositoriesRequest: PropTypes.func.isRequired,
   repositories: PropTypes.shape({
     data: PropTypes.arrayOf(PropTypes.shape({})),
