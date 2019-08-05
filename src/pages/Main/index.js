@@ -4,10 +4,19 @@ import styled from 'styled-components';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { withRouter } from 'react-router-dom';
-
+import { Row as _Row, Container as _Container } from '../../components/grid';
 import { Creators as RepositoriesActions } from '../../store/ducks/repositories';
 
 import SearchBar from '../../components/searchbar';
+
+const Container = styled(_Container)`
+  text-align: center;
+`;
+
+const Row = styled(_Row)`
+  display: flex;
+  justify-content: center;
+`;
 
 const Main = ({ getRepositoriesRequest, repositories, history }) => {
   const [username, setUsername] = useState('');
@@ -21,14 +30,22 @@ const Main = ({ getRepositoriesRequest, repositories, history }) => {
   };
 
   return (
-    <SearchBar
-      onSubmit={handleSubmit}
-      keyword={username}
-      onChange={e => setUsername(e.target.value)}
-      isLoading={loading}
-      text="github.com/"
-    />
-  )
+    <Container>
+      <div className="message-presentation">
+        <h1>GITDISCOVERY</h1>
+        <p>Explore os repositórios dos usuários de forma simples</p>
+      </div>
+      <Row>
+        <SearchBar
+          onSubmit={handleSubmit}
+          keyword={username}
+          onChange={e => setUsername(e.target.value)}
+          isLoading={loading}
+          text="github.com/"
+        />
+      </Row>
+    </Container>
+  );
 }
 
 Main.propTypes = {
