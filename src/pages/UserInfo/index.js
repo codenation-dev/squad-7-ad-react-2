@@ -1,12 +1,10 @@
 import React from 'react';
-
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import ReactPaginate from 'react-paginate';
 
-import styled from 'styled-components';
-import { Column, Container as _Container, Row } from '../../components/grid';
+import { Column, Row } from '../../components/grid';
 import { Creators as RepositoriesActions } from '../../store/ducks/repositories';
 import CardList from '../../components/cardList';
 import UserAbout from '../../components/userAbout';
@@ -15,16 +13,7 @@ import { CardContent, CardHeader, StyledCard } from '../../components/card';
 import MessageNotFound from '../../components/messageNotFound';
 import '../../styles/react-paginate.css';
 import { Spinner } from '../../components/searchbar/style';
-
-const Container = styled(_Container)`
-  margin-top: 16px;
-`;
-
-const WrapperLoading = styled.div`
-  display: flex;
-  align-items: center;
-  justify-content: center;
-`
+import { WrapperLoading, Container } from './style';
 
 const getProfile = repositories => {
   let profile = {};

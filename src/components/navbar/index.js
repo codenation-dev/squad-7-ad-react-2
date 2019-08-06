@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import { Link, withRouter } from 'react-router-dom';
+import { Link as _Link, withRouter } from 'react-router-dom';
 
 import { Creators as RepositoriesActions } from '../../store/ducks/repositories';
 import { Container as _Container } from '../grid';
@@ -16,6 +16,10 @@ const Container = styled(_Container)`
   height: 80px;
   align-items: center;
 `;
+
+const Link = styled(_Link)`
+  text-decoration: none;
+`
 
 const NavBar = ({ getRepositoriesRequest, history }) => {
   const [username, setUsername] = useState('');
