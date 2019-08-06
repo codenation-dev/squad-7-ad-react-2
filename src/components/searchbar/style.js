@@ -1,5 +1,6 @@
-import styled from 'styled-components'
+import styled, { css } from 'styled-components'
 import { Spinner4 as _Spinner } from 'styled-icons/icomoon/Spinner4';
+import { Search as _Search } from 'styled-icons/boxicons-regular/Search'
 
 export const Spinner = styled(_Spinner)`
   animation: rotate 2s linear infinite;
@@ -27,12 +28,50 @@ export const Spinner = styled(_Spinner)`
 export const Form = styled.form` 
   display: flex;
   align-items: center;
+  ${props =>
+    props.internal &&
+    css`
+      @media (max-width: 767px) {
+        flex-wrap: wrap;
+        justify-content: center;
+        ${SearchButton}, ${SearchInput} {
+          flex-basis: 100%;
+        }
+        ${SearchButton} {
+          margin-top: 25px;
+        }
+      }
+    `}
+  ${props =>
+    !props.internal &&
+    css`
+      @media (max-width: 600px) {
+        margin-top: 15px;
+        width: 100%;
+        ${SearchButton}, ${SearchInput} {
+          width: calc(100% - 40px)
+        }
+        ${SearchButton} {
+          width: 40px;
+          padding: 10px 0;
+        }
+        ${TextButton} {
+          display: none;
+        }
+        ${Search} {
+          display: inline-block;
+        }
+      }
+    `}
 `
 
 export const Text = styled.span`
   font-size: 18px;
   color: #000000;
   margin-right: 8px;
+  @media (max-width: 767px) {
+    display: none;
+  }
 `
 
 export const SearchInput = styled.input`
@@ -53,4 +92,10 @@ export const SearchButton = styled.button`
   cursor: pointer;
   width: 150px;
 `
+
+export const Search = styled(_Search)`
+  display: none;
+`
+
+export const TextButton = styled.span``
 

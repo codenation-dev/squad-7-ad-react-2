@@ -8,6 +8,8 @@ const Link = styled.a`
   font-size: 12px;
   line-height: 14px;
   text-decoration: none;
+  width: 100%;
+  overflow: hidden;
   &:hover {
     color: #888888;
   }

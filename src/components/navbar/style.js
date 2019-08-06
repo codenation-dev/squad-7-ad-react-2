@@ -1,4 +1,17 @@
 import styled from 'styled-components'
+import { Container as _Container } from '../grid';
+
+export const Container = styled(_Container)`
+  display: flex;
+  justify-content: space-between;
+  height: 80px;
+  align-items: center;
+  @media(max-width: 600px) {
+    flex-direction: column;
+    padding: 15px;
+    height: auto;
+  }
+`;
 
 export const Nav = styled.div` 
   border-bottom: 2px solid #F0F0F0;
