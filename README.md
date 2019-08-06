@@ -16,7 +16,7 @@ A aplicação tem como objetivo demonstrar informações dos repositórios do Gi
 npm install (or yarn install)
 ```
 
-### Rodar
+### Execução
 
 ```bash
 npm start (or yarn start)
