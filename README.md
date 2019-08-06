@@ -1,6 +1,6 @@
 # Squad 7 - Aceleradev React
 
-## Projeto Final - Github
+## Projeto Final - GITDISCOVERY
 
 Projeto desenvolvido pelo Squad 7 durante o Aceleradev React da Codenation.
 
