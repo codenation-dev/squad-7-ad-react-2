@@ -1,12 +1,11 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
-import styled from 'styled-components';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { withRouter } from 'react-router-dom';
 
+import { Container, Title, Subtitle } from './style';
 import { Creators as RepositoriesActions } from '../../store/ducks/repositories';
-
 import SearchBar from '../../components/searchbar';
 
 const Main = ({ getRepositoriesRequest, repositories, history }) => {
@@ -21,13 +20,17 @@ const Main = ({ getRepositoriesRequest, repositories, history }) => {
   };
 
   return (
-    <SearchBar
-      onSubmit={handleSubmit}
-      keyword={username}
-      onChange={e => setUsername(e.target.value)}
-      isLoading={loading}
-      text="github.com/"
-    />
+    <Container>
+      <Title>GITDISCOVERY</Title>
+      <Subtitle>Explore os repositórios dos usuários de forma simples</Subtitle>
+      <SearchBar
+        onSubmit={handleSubmit}
+        keyword={username}
+        onChange={e => setUsername(e.target.value)}
+        isLoading={loading}
+        text="github.com/"
+      />
+    </Container>
   )
 }
 
