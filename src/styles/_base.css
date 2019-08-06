@@ -21,17 +21,3 @@ ul {
   margin: 0;
   padding: 0;
 }
-
-.message-presentation {
-  margin: 126px 0 72px 0;
-}
-
-.message-presentation h1 {
-  font-size: var(--font-size-extra-large);
-  letter-spacing: 16px;
-}
-
-.message-presentation p {
-  margin-top: 16px;
-  color: var(--gray-scale-4);
-}
