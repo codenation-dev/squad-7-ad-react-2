@@ -1,4 +1,4 @@
-import React,{ useState } from 'react';
+import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
@@ -64,10 +64,11 @@ const Main = ({ getRepositoriesRequest, repositories, summary }) => {
     <WrapperLoading>
       <Spinner height="55" />
     </WrapperLoading>
-  )
+  );
 
   const repositoriesFiltered = filterRepositories(repositories, menuActive);
-  const renderContent = () => repositories.error ? (
+  const renderContent = () =>
+    repositories.error ? (
       <MessageNotFound />
     ) : (
       <Row>
@@ -102,7 +103,7 @@ const Main = ({ getRepositoriesRequest, repositories, summary }) => {
               pageCount={repositories.pageCount}
               forcePage={repositories.pageIndex}
               marginPagesDisplayed={1}
-              pageRangeDisplayed={7}
+              pageRangeDisplayed={2}
               previousLabel="anterior"
               nextLabel="próximo"
               breakLabel="..."
@@ -111,8 +112,8 @@ const Main = ({ getRepositoriesRequest, repositories, summary }) => {
               activeClassName="active"
               breakClassName="page-item"
               pageClassName="page-item"
-              previousClassName="page-item"
-              nextClassName="page-item"
+              previousClassName="page-item previous-item"
+              nextClassName="page-item next-item"
               pageLinkClassName="page-link"
               previousLinkClassName="page-link"
               nextLinkClassName="page-link"
@@ -120,14 +121,9 @@ const Main = ({ getRepositoriesRequest, repositories, summary }) => {
           ) : null}
         </Column>
       </Row>
-    )
+    );
 
-
-  return (
-    <Container>
-      { loading ? renderLoading() : renderContent() }
-    </Container>
-  );
+  return <Container>{loading ? renderLoading() : renderContent()}</Container>;
 };
 
 Main.propTypes = {
