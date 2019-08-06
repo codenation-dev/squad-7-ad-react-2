@@ -1,4 +1,4 @@
-import React from 'react';
+import React,{ useState } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
@@ -14,6 +14,7 @@ import MessageNotFound from '../../components/messageNotFound';
 import '../../styles/react-paginate.css';
 import { Spinner } from '../../components/searchbar/style';
 import { WrapperLoading, Container } from './style';
+import CardLink from '../../components/cardLink';
 
 const getProfile = repositories => {
   let profile = {};
@@ -27,9 +28,33 @@ const getProfile = repositories => {
   return profile;
 };
 
+const getLanguages = repositories => {
+  if (repositories.data.length) {
+    const languages = repositories.data
+      .map(repository => repository.language)
+      .filter(language => !!language)
+      .sort();
+
+    return ['Todos', ...new Set(languages)];
+  }
+
+  return ['Todos'];
+};
+
+const filterRepositories = (repositories, menuActive) => {
+  if (menuActive === 'Todos') {
+    return repositories.data;
+  }
+
+  return repositories.data.filter(
+    repository => repository.language === menuActive
+  );
+};
+
 const Main = ({ getRepositoriesRequest, repositories, summary }) => {
+  const [menuActive, setMenuActive] = useState('Todos');
   const { loading } = repositories;
-  
+
   const onPageChange = pageIndex => {
     const pageNumber = pageIndex.selected + 1;
     getRepositoriesRequest(repositories.username, pageNumber);
@@ -37,10 +62,11 @@ const Main = ({ getRepositoriesRequest, repositories, summary }) => {
 
   const renderLoading = () => (
     <WrapperLoading>
-      <Spinner height="55" /> 
+      <Spinner height="55" />
     </WrapperLoading>
   )
 
+  const repositoriesFiltered = filterRepositories(repositories, menuActive);
   const renderContent = () => repositories.error ? (
       <MessageNotFound />
     ) : (
@@ -48,12 +74,26 @@ const Main = ({ getRepositoriesRequest, repositories, summary }) => {
         <Column span="4">
           <UserAbout profile={getProfile(repositories)} />
           {summary.length > 0 && <Summary summary={summary} />}
+          <StyledCard>
+            <CardHeader>LINGUAGENS</CardHeader>
+            <CardContent>
+              {getLanguages(repositories).map((language, idx) => (
+                <CardLink
+                  key={idx}
+                  title={language}
+                  isActive={menuActive === language}
+                  handleClick={() => setMenuActive(language)}
+                />
+              ))}
+            </CardContent>
+          </StyledCard>
         </Column>
+
         <Column span="8">
           <StyledCard>
             <CardHeader>REPOSITÓRIOS</CardHeader>
             <CardContent>
-              <CardList repositories={repositories.data} />
+              <CardList repositories={repositoriesFiltered} />
             </CardContent>
           </StyledCard>
           {repositories.data.length > 0 && repositories.pageCount > 0 ? (
@@ -81,11 +121,11 @@ const Main = ({ getRepositoriesRequest, repositories, summary }) => {
         </Column>
       </Row>
     )
-  
+
 
   return (
     <Container>
-      { loading ? renderLoading() : renderContent() } 
+      { loading ? renderLoading() : renderContent() }
     </Container>
   );
 };
