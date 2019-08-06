@@ -6,16 +6,8 @@ import { bindActionCreators } from 'redux';
 import { Link as _Link, withRouter } from 'react-router-dom';
 
 import { Creators as RepositoriesActions } from '../../store/ducks/repositories';
-import { Container as _Container } from '../grid';
-import { Nav, Logo } from './style';
+import { Nav, Logo, Container } from './style';
 import SearchBar from '../searchbar';
-
-const Container = styled(_Container)`
-  display: flex;
-  justify-content: space-between;
-  height: 80px;
-  align-items: center;
-`;
 
 const Link = styled(_Link)`
   text-decoration: none;

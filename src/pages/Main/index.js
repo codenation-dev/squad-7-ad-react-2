@@ -29,6 +29,7 @@ const Main = ({ getRepositoriesRequest, repositories, history }) => {
         onChange={e => setUsername(e.target.value)}
         isLoading={loading}
         text="github.com/"
+        internal={true}
       />
     </Container>
   )

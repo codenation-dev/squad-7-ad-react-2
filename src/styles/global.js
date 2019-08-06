@@ -12,6 +12,9 @@ const GlobalStyle = createGlobalStyle`
     -webkit-font-smoothing: antialiased !important;
     font-family: sans-serif;
     padding-top: 80px;
+    @media (max-width: 600px) {
+      padding-top: 145px;
+    }
   }
 `;
 

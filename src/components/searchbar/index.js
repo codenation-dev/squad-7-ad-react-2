@@ -1,17 +1,18 @@
 import React from 'react';
 
-import { Text, Form, SearchInput, SearchButton, Spinner } from './style.js';
+import { Text, Form, SearchInput, SearchButton, Spinner, TextButton, Search } from './style.js';
 
 const SearchBar = ({
   onSubmit,
   keyword,
   onChange,
   isLoading,
-  text = ""
+  text = "",
+  internal = false
 }) => {
   
   return (
-    <Form onSubmit={onSubmit}>
+    <Form onSubmit={onSubmit} internal={internal}>
       {text && <Text>{text}</Text>}
       <SearchInput 
         value={keyword} 
@@ -19,7 +20,10 @@ const SearchBar = ({
         type="text" 
         onChange={onChange} />
       <SearchButton type="Submit">
-        { isLoading ? <Spinner height="14" /> : 'Procurar' }
+        <Search height="18" />
+        <TextButton>
+          { isLoading ? <Spinner height="14" /> : 'Procurar' }
+        </TextButton>
       </SearchButton>
     </Form>
   )

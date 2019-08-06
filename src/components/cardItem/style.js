@@ -19,6 +19,7 @@ export const Title = styled.div`
   color: var(--primary);
   font-weight: 500;
   margin-bottom: 5px;
+  word-break: break-word;
 `;
 
 export const Meta = styled.div`
@@ -35,8 +36,7 @@ export const Language = styled.span`
   }
 `;
 
-export const StartDate = styled.span`
-`;
+export const StartDate = styled.span``;
 
 export const Info = styled.div`
   color: var(--gray-scale-4);
@@ -52,6 +52,7 @@ export const Info = styled.div`
 `;
 export const Description = styled.div`
   margin-bottom: 5px;
+  word-break: break-word;
   @media only screen and (min-width: 768px) {
     margin-right: 10px;
     margin-bottom: 0;

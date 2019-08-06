@@ -25,5 +25,16 @@ a.page-link {
 }
 
 .page-item.disabled .page-link {
-    color: var(--gray-scale-3);
+  color: var(--gray-scale-3);
+}
+
+@media (max-width: 767px) {
+  .previous-item,
+  .next-item {
+    display: none;
   }
+
+  .pagination {
+    margin-bottom: 20px;
+  }
+}

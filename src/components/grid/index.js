@@ -2,7 +2,7 @@ import styled from 'styled-components';
 
 export const Container = styled.div`
   width: ${({ fluid }) => (fluid ? '100%' : '960px')};
-  min-width: 960px;
+  max-width: 100%;
   padding: 0 15px;
   margin: 0 auto;
   box-sizing: border-box;
@@ -31,4 +31,7 @@ export const Column = styled.div`
   grid-column: span ${({ span }) => span || '1'};
   min-height: 1px;
   box-sizing: border-box;
+  @media (max-width: 767px) {
+    grid-column: span 12;
+  }
 `;
