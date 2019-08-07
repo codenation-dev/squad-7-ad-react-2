@@ -30,6 +30,13 @@
     "test": "react-scripts test",
     "eject": "react-scripts eject"
   },
+  "jest": {
+    "collectCoverageFrom": [
+      "src/**/*.js",
+      "!src/index.js",
+      "!src/config/RectotronConfig.js"
+    ]
+  },
   "browserslist": {
     "production": [
       ">0.2%",
