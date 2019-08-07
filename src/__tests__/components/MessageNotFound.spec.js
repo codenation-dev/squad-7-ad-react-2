@@ -43,7 +43,6 @@ it('should be able to Change User Name', () => {
   input.simulate('change', { target: { value: 'UserNameTest' } });
   const messageNotFoundWrapper = wrapper.find('MessageNotFound');
   const { username } = messageNotFoundWrapper.state();
-  console.log(messageNotFoundWrapper.state());
 
   expect(username).toBe('UserNameTest');
 });
